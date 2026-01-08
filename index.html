@@ -971,7 +971,7 @@
                         <i class="bi bi-file-earmark-pdf resource-icon"></i>
                         <h3 class="resource-title">Guia NR-1</h3>
                         <p>Conformidade com as novas exigências regulamentares.</p>
-                        <button class="btn-download" onclick="gtag('event', 'pdf_nr1_click');">
+                        <button class="btn-download" onclick="openLeadPopup()">
                             <i class="bi bi-download"></i> Baixar
                         </button>
                     </div>
@@ -1169,6 +1169,73 @@
             });
         });
     </script>
+    <!-- POPUP LEAD MAGNET -->
+    <div id="leadPopup"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999; align-items: center; justify-content: center;">
+        <div
+            style="background: white; padding: 3rem; border-radius: 16px; max-width: 500px; width: 90%; position: relative;">
+            <button onclick="closeLeadPopup()"
+                style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #6B7280;">&times;</button>
 
+            <h3 style="font-family: 'Playfair Display', serif; color: #0052CC; margin-bottom: 1rem; font-size: 1.8rem;">📥
+                Baixar Guia NR-1 Gratuito</h3>
+            <p style="color: #374151; margin-bottom: 2rem;">Preencha os dados abaixo para receber o guia completo sobre
+                conformidade NR-1.</p>
+
+            <form id="leadForm" onsubmit="submitLeadForm(event)">
+                <div style="margin-bottom: 1rem;">
+                    <input type="text" id="leadName" placeholder="Seu nome completo" required
+                        style="width: 100%; padding: 12px; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 1rem;">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <input type="email" id="leadEmail" placeholder="Seu melhor email" required
+                        style="width: 100%; padding: 12px; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 1rem;">
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <input type="text" id="leadCompany" placeholder="Nome da empresa" required
+                        style="width: 100%; padding: 12px; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 1rem;">
+                </div>
+                <button type="submit"
+                    style="width: 100%; background: #10B981; color: white; padding: 14px; border: none; border-radius: 8px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s;">
+                    Baixar Guia Agora
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openLeadPopup() {
+            document.getElementById('leadPopup').style.display = 'flex';
+            gtag('event', 'lead_popup_opened', { 'event_category': 'Lead Magnet' });
+        }
+
+        function closeLeadPopup() {
+            document.getElementById('leadPopup').style.display = 'none';
+        }
+
+        function submitLeadForm(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('leadName').value;
+            const email = document.getElementById('leadEmail').value;
+            const company = document.getElementById('leadCompany').value;
+
+            // Enviar evento para Google Analytics
+            gtag('event', 'lead_captured', {
+                'event_category': 'Lead Magnet',
+                'event_label': 'Guia NR-1',
+                'value': name + ' - ' + email + ' - ' + company
+            });
+
+            // Fechar popup
+            closeLeadPopup();
+
+            // Baixar PDF
+            window.open('guia-nr1.pdf', '_blank');
+
+            // Mostrar mensagem de sucesso
+            alert('✅ Obrigado! O download do Guia NR-1 vai começar agora.');
+        }
+</script>
 </body>
 </html>
