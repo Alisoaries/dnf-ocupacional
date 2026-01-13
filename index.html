@@ -1213,29 +1213,57 @@
             document.getElementById('leadPopup').style.display = 'none';
         }
 
-        function submitLeadForm(event) {
-            event.preventDefault();
+        async function submitLeadForm(event) {
+                event.preventDefault();
 
-            const name = document.getElementById('leadName').value;
-            const email = document.getElementById('leadEmail').value;
-            const company = document.getElementById('leadCompany').value;
+                const nome = document.getElementById('leadName').value;
+                const email = document.getElementById('leadEmail').value;
+                const empresa = document.getElementById('leadCompany').value;
 
-            // Enviar evento para Google Analytics
-            gtag('event', 'lead_captured', {
-                'event_category': 'Lead Magnet',
-                'event_label': 'Guia NR-1',
-                'value': name + ' - ' + email + ' - ' + company
-            });
+                // Mostrar loading
+                const button = event.target.querySelector('button[type="submit"]');
+                const originalText = button.innerHTML;
+                button.innerHTML = '⏳ Enviando...';
+                button.disabled = true;
 
-            // Fechar popup
-            closeLeadPopup();
+                try {
+                    // Enviar para API
+                    const response = await fetch('https://dnfocupacional.com.br/api/lead', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ nome, email, empresa })
+                    });
 
-            // Baixar PDF
-            window.open('guia-nr1.pdf', '_blank');
+                    const data = await response.json();
 
-            // Mostrar mensagem de sucesso
-            alert('✅ Obrigado! O download do Guia NR-1 vai começar agora.');
-        }
+                    if (response.ok) {
+                        // Enviar evento para Google Analytics
+                        gtag('event', 'lead_captured', {
+                            'event_category': 'Lead Magnet',
+                            'event_label': 'Guia NR-1',
+                            'value': nome + ' - ' + email + ' - ' + empresa
+                        });
+
+                        // Fechar popup
+                        closeLeadPopup();
+
+                        // Mostrar mensagem de sucesso
+                        alert('✅ Perfeito! Enviamos o Guia NR-1 para o seu email: ' + email);
+                    } else {
+                        throw new Error(data.error || 'Erro ao processar solicitação');
+                    }
+
+                } catch (error) {
+                    console.error('Erro:', error);
+                    alert('❌ Ops! Ocorreu um erro. Tente novamente ou entre em contato conosco.');
+                } finally {
+                    // Restaurar botão
+                    button.innerHTML = originalText;
+                    button.disabled = false;
+                }
+            }
 </script>
 </body>
 </html>
