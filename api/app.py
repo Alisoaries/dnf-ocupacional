@@ -14,7 +14,6 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
-# Configuração do banco de dados
 def get_db_connection():
     return mysql.connector.connect(
         host=os.getenv('DB_HOST', 'localhost'),
@@ -31,11 +30,9 @@ def capture_lead():
         email = data.get('email')
         empresa = data.get('empresa', '')
         
-        # Validação básica
         if not nome or not email:
             return jsonify({'error': 'Nome e email são obrigatórios'}), 400
         
-        # Salvar no banco
         conn = get_db_connection()
         cursor = conn.cursor()
         cursor.execute(
@@ -46,7 +43,6 @@ def capture_lead():
         cursor.close()
         conn.close()
         
-        # Enviar email com PDF
         enviar_email_com_pdf(nome, email)
         
         return jsonify({'success': True, 'message': 'Lead capturado com sucesso!'}), 200
@@ -55,21 +51,20 @@ def capture_lead():
         return jsonify({'error': str(e)}), 500
 
 def enviar_email_com_pdf(nome, email_destino):
-    # Configurações de email
     email_remetente = os.getenv('EMAIL_USER')
     senha_email = os.getenv('EMAIL_PASSWORD')
+    smtp_host = os.getenv('SMTP_HOST', 'smtp.gmail.com')
+    smtp_port = int(os.getenv('SMTP_PORT', 587))
     
-    # Criar mensagem
     msg = MIMEMultipart()
     msg['From'] = email_remetente
     msg['To'] = email_destino
     msg['Subject'] = '📥 Seu Guia NR-1 - DNF Ocupacional'
     
-    # Corpo do email
     corpo = f"""
     <html>
-    <body style="font-family: Arial, sans-serif; color: #333;">
-        <h2 style="color: #0052CC;">Olá, {nome}!</h2>
+    <body style='font-family: Arial, sans-serif; color: #333;'>
+        <h2 style='color: #0052CC;'>Olá, {nome}!</h2>
         <p>Obrigado pelo seu interesse no nosso material sobre <strong>NR-1</strong>.</p>
         <p>Segue em anexo o Guia Completo da NR-1 que você solicitou.</p>
         <p>Se tiver dúvidas ou precisar de consultoria especializada, estamos à disposição!</p>
@@ -81,8 +76,7 @@ def enviar_email_com_pdf(nome, email_destino):
     
     msg.attach(MIMEText(corpo, 'html'))
     
-    # Anexar PDF
-    pdf_path = '../guia-nr1.pdf'
+    pdf_path = '/var/www/dnf-ocupacional/resources/guia-nr1.pdf'
     with open(pdf_path, 'rb') as arquivo:
         part = MIMEBase('application', 'octet-stream')
         part.set_payload(arquivo.read())
@@ -90,8 +84,7 @@ def enviar_email_com_pdf(nome, email_destino):
         part.add_header('Content-Disposition', 'attachment; filename=Guia-NR1-DNF-Ocupacional.pdf')
         msg.attach(part)
     
-    # Enviar email
-    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server = smtplib.SMTP(smtp_host, smtp_port)
     server.starttls()
     server.login(email_remetente, senha_email)
     server.send_message(msg)
