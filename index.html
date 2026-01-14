@@ -7,12 +7,12 @@
     <meta name="description" content="Programa de Saúde Ocupacional com foco em medicina do trabalho, conformidade NR-1 e redução de afastamentos.">
     
     <!-- Favicons -->
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png">
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="img/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="img/android-chrome-512x512.png">
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -223,6 +223,8 @@
             color: var(--white);
             font-size: 4rem;
             box-shadow: var(--shadow-xl);
+            overflow: hidden; /* IMPORTANTE: mantém a imagem dentro das bordas arredondadas */
+            min-height: 400px; /* garante uma altura mínima */
         }
 
         /* ===== SECTION GENERAL ===== */
@@ -708,7 +710,7 @@
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
                 <a class="navbar-brand" href="#home">
-                    <img src="dnf-logo.png" alt="DNF Ocupacional Logo">
+                    <img src="img/dnf-logo.png" alt="DNF Ocupacional Logo">
                     DNF Ocupacional
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -763,7 +765,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="hero-image">
-                        <i class="bi bi-building"></i>
+                        <img src="img/hero-worker-1.png" alt="Saúde Mental no Trabalho" class="img-fluid w-100 h-100" style="object-fit: cover;">
                     </div>
                 </div>
             </div>
