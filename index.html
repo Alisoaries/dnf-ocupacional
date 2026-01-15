@@ -223,8 +223,8 @@
             color: var(--white);
             font-size: 4rem;
             box-shadow: var(--shadow-xl);
-            overflow: hidden; /* IMPORTANTE: mantém a imagem dentro das bordas arredondadas */
-            min-height: 400px; /* garante uma altura mínima */
+            overflow: hidden;
+            min-height: 400px;
         }
 
         /* ===== SECTION GENERAL ===== */
@@ -356,17 +356,9 @@
             display: inline-block;
         }
 
-        .service-icon.pcmso {
-            color: var(--primary-blue);
-        }
-
-        .service-icon.ergonomia {
-            color: var(--secondary-green);
-        }
-
-        .service-icon.absenteismo {
-            color: var(--accent-red);
-        }
+        .service-icon.pcmso { color: var(--primary-blue); }
+        .service-icon.ergonomia { color: var(--secondary-green); }
+        .service-icon.absenteismo { color: var(--accent-red); }
 
         .service-title {
             font-size: 1.3rem;
@@ -392,9 +384,7 @@
         }
 
         /* ===== DIFFERENTIALS SECTION ===== */
-        .differentials-section {
-            background: var(--white);
-        }
+        .differentials-section { background: var(--white); }
 
         .differential-box {
             background: linear-gradient(135deg, rgba(0, 82, 204, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%);
@@ -434,9 +424,7 @@
         }
 
         /* ===== SOCIAL PROOF SECTION ===== */
-        .social-proof-section {
-            background: var(--neutral-lightest);
-        }
+        .social-proof-section { background: var(--neutral-lightest); }
 
         .case-card {
             background: var(--white);
@@ -490,9 +478,7 @@
         }
 
         /* ===== RESOURCES SECTION ===== */
-        .resources-section {
-            background: var(--white);
-        }
+        .resources-section { background: var(--white); }
 
         .resource-card {
             background: linear-gradient(135deg, rgba(0, 82, 204, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%);
@@ -546,9 +532,7 @@
         }
 
         /* ===== FAQ SECTION ===== */
-        .faq-section {
-            background: var(--neutral-lightest);
-        }
+        .faq-section { background: var(--neutral-lightest); }
 
         .faq-item {
             background: var(--white);
@@ -574,9 +558,7 @@
             display: none;
         }
 
-        .faq-item.active .faq-answer {
-            display: block;
-        }
+        .faq-item.active .faq-answer { display: block; }
 
         /* ===== CTA FINAL SECTION ===== */
         .cta-final-section {
@@ -635,14 +617,9 @@
             transition: color 0.3s ease;
         }
 
-        .footer-link:hover {
-            color: var(--primary-blue);
-        }
+        .footer-link:hover { color: var(--primary-blue); }
 
-        .footer-title {
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
+        .footer-title { font-weight: 700; margin-bottom: 1rem; }
 
         .footer-bottom {
             border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -653,28 +630,11 @@
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2rem;
-            }
-
-            .section-title {
-                font-size: 1.8rem;
-            }
-
-            .hero-cta-group {
-                flex-direction: column;
-            }
-
-            .btn-primary-cta,
-            .btn-secondary-cta {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .hero-image {
-                height: 250px;
-                margin-top: 2rem;
-            }
+            .hero-title { font-size: 2rem; }
+            .section-title { font-size: 1.8rem; }
+            .hero-cta-group { flex-direction: column; }
+            .btn-primary-cta, .btn-secondary-cta { width: 100%; justify-content: center; }
+            .hero-image { height: 250px; margin-top: 2rem; }
         }
 
         .floating-whatsapp {
@@ -1171,6 +1131,7 @@
             });
         });
     </script>
+
     <!-- POPUP LEAD MAGNET -->
     <div id="leadPopup"
         style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999; align-items: center; justify-content: center;">
@@ -1241,12 +1202,13 @@
                     const data = await response.json();
 
                     if (response.ok) {
-                        // Enviar evento para Google Analytics
-                        gtag('event', 'lead_captured', {
-                            'event_category': 'Lead Magnet',
-                            'event_label': 'Guia NR-1',
-                            'value': nome + ' - ' + email + ' - ' + empresa
-                        });
+                        // ✅ Evento padrão GA4 (conversão) - SEM DADOS PESSOAIS
+                        if (typeof gtag === "function") {
+                            gtag("event", "generate_lead", {
+                                event_category: "Lead Magnet",
+                                event_label: "Guia NR-1"
+                            });
+                        }
 
                         // Fechar popup
                         closeLeadPopup();
