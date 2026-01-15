@@ -1,1 +1,14 @@
 api/.env
+api-node/.env
+.env
+
+api-node/node_modules/
+
+*.bak
+*.bak.*
+
+*.log
+npm-debug.log*
+
+.DS_Store
+Thumbs.db
