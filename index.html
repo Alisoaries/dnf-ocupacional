@@ -441,10 +441,11 @@
         }
 
         .case-result {
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--secondary-green);
             margin-bottom: 0.5rem;
+            line-height: 1.3;
         }
 
         .case-description {
@@ -466,10 +467,11 @@
         }
 
         .stats-number {
-            font-size: 2.5rem;
+            font-size: 1.75rem;
             font-weight: 700;
             color: var(--primary-blue);
             margin-bottom: 0.5rem;
+            line-height: 1.2;
         }
 
         .stats-label {
@@ -493,6 +495,108 @@
             transform: translateY(-5px);
             box-shadow: var(--shadow-lg);
             border-color: var(--primary-blue);
+        }
+
+        /* Card Horizontal - Compacto */
+        .resource-card-horizontal {
+            background: linear-gradient(135deg, rgba(0, 82, 204, 0.06) 0%, rgba(16, 185, 129, 0.06) 100%);
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .resource-card-horizontal:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .resource-horizontal-content {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .resource-horizontal-icon {
+            flex-shrink: 0;
+        }
+
+        .resource-horizontal-icon i {
+            font-size: 3.5rem;
+            color: var(--primary-blue);
+        }
+
+        .resource-horizontal-info {
+            flex: 1;
+            text-align: left;
+        }
+
+        .featured-badge-inline {
+            display: inline-block;
+            background: var(--secondary-green);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .resource-title-horizontal {
+            font-size: 1.5rem;
+            margin: 0.5rem 0;
+            color: var(--text-dark);
+        }
+
+        .resource-description-horizontal {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        .resource-horizontal-action {
+            flex-shrink: 0;
+        }
+
+        .btn-download-horizontal {
+            padding: 0.9rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            background: var(--secondary-green);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .btn-download-horizontal:hover {
+            background: #0d9488;
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .resource-horizontal-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .resource-horizontal-info {
+                text-align: center;
+            }
+        }
+
+        .btn-download-featured {
+            padding: 1rem 3rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-download-featured:hover {
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+            transform: scale(1.05);
         }
 
         .resource-icon {
@@ -661,6 +765,162 @@
             50% { transform: scale(1.1); }
             100% { transform: scale(1); }
         }
+        /* ===== MODAL BASE (para ambos popups) ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6B7280;
+            transition: color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: var(--neutral-dark);
+        }
+
+        /* ===== MODAL DE PROPOSTA ===== */
+        .modal-proposta {
+            max-width: 600px;
+        }
+
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .modal-subtitle {
+            color: var(--neutral-light);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .proposta-form {
+            width: 100%;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            width: 100%;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.875rem;
+            border: 1px solid var(--neutral-lighter);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn-submit-proposta {
+            width: 100%;
+            padding: 1rem;
+            background: var(--secondary-green);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-submit-proposta:hover {
+            background: var(--secondary-green-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-submit-proposta:disabled {
+            background: var(--neutral-lighter);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-message {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        .form-message.success {
+            background: #D1FAE5;
+            color: #065F46;
+            border: 1px solid #10B981;
+        }
+
+        .form-message.error {
+            background: #FEE2E2;
+            color: #991B1B;
+            border: 1px solid #DC2626;
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-proposta {
+                max-width: 90%;
+                padding: 2rem 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -691,7 +951,8 @@
                             <a class="nav-link" href="#contato">Contato</a>
                         </li>
                         <li class="nav-item ms-2">
-                            <button class="btn btn-header-cta" onclick="gtag('event', 'header_proposta_click');">Solicitar Proposta</button>
+                            <button class="btn btn-header-cta" onclick="openPropostaModal(); gtag('event', 'header_proposta_click');">Solicitar
+                                Proposta</button>
                         </li>
                     </ul>
                 </div>
@@ -715,7 +976,7 @@
                         Programa de Saúde Ocupacional que reduz afastamentos, melhora produtividade e garante conformidade com as novas regulamentações.
                     </p>
                     <div class="hero-cta-group">
-                        <button class="btn-primary-cta" onclick="gtag('event', 'hero_proposta_click');">
+                        <button class="btn-primary-cta" onclick="openPropostaModal(); gtag('event', 'hero_proposta_click');">
                             <i class="bi bi-arrow-right"></i> Solicitar Proposta
                         </button>
                         <button class="btn-secondary-cta" onclick="gtag('event', 'hero_pdf_click');">
@@ -873,14 +1134,14 @@
             <div class="row g-4 mt-4">
                 <div class="col-md-6">
                     <div class="stats-box">
-                        <div class="stats-number">15+</div>
-                        <div class="stats-label">Anos de Experiência em Medicina Ocupacional</div>
+                        <div class="stats-number">Mais de 10 Anos</div>
+                        <div class="stats-label">Experiência em Medicina Ocupacional</div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="stats-box">
-                        <div class="stats-number">500+</div>
-                        <div class="stats-label">Empresas Atendidas com Sucesso</div>
+                        <div class="stats-number">Centenas de Empresas</div>
+                        <div class="stats-label">Atendidas em Todo o Brasil</div>
                     </div>
                 </div>
             </div>
@@ -897,23 +1158,23 @@
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6">
                     <div class="case-card">
-                        <div class="case-result">-35%</div>
-                        <div class="case-description">Redução em afastamentos por saúde mental</div>
-                        <div class="case-company">Empresa de Construção - São Paulo</div>
+                        <div class="case-result">Até 40% de Redução</div>
+                        <div class="case-description">Diminuição em afastamentos</div>
+                        <div class="case-company">Construção, Indústria e Serviços</div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="case-card">
-                        <div class="case-result">R$ 250k</div>
-                        <div class="case-description">Economia anual em custos de afastamentos</div>
-                        <div class="case-company">Indústria - Minas Gerais</div>
+                        <div class="case-result">Economia Comprovada</div>
+                        <div class="case-description">Redução significativa em custos operacionais</div>
+                        <div class="case-company">Empresas de Médio e Grande Porte</div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="case-card">
-                        <div class="case-result">+42%</div>
-                        <div class="case-description">Melhoria em produtividade dos colaboradores</div>
-                        <div class="case-company">Empresa Logística - Rio de Janeiro</div>
+                        <div class="case-result">Até 50% Mais Produtividade</div>
+                        <div class="case-description">Equipes mais saudáveis e engajadas</div>
+                        <div class="case-company">Logística, Varejo e Outros Setores</div>
                     </div>
                 </div>
             </div>
@@ -923,21 +1184,33 @@
     <!-- RESOURCES SECTION -->
     <section class="resources-section section-padding">
         <div class="container">
-            <h2 class="section-title">Recursos Gratuitos</h2>
+            <h2 class="section-title">Recurso Gratuito</h2>
             <p class="section-subtitle">
-                Materiais educacionais para ajudar sua empresa a entender e implementar saúde ocupacional efetiva.
+                Material educacional para ajudar sua empresa a entender e implementar saúde ocupacional efetiva.
             </p>
-            <div class="row g-4">
-                <div class="col-lg-3 col-md-6">
-                    <div class="resource-card">
-                        <i class="bi bi-file-earmark-pdf resource-icon"></i>
-                        <h3 class="resource-title">Guia NR-1</h3>
-                        <p>Conformidade com as novas exigências regulamentares.</p>
-                        <button class="btn-download" onclick="openLeadPopup()">
-                            <i class="bi bi-download"></i> Baixar
-                        </button>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-8 col-md-10">
+                    <div class="resource-card resource-card-horizontal">
+                        <div class="resource-horizontal-content">
+                            <div class="resource-horizontal-icon">
+                                <i class="bi bi-file-earmark-pdf"></i>
+                            </div>
+                            <div class="resource-horizontal-info">
+                                <span class="featured-badge-inline">Essencial</span>
+                                <h3 class="resource-title-horizontal">Guia Completo NR-1</h3>
+                                <p class="resource-description-horizontal">Conformidade com as novas exigências regulamentares.
+                                    Material completo e atualizado.</p>
+                            </div>
+                            <div class="resource-horizontal-action">
+                                <button class="btn-download-horizontal" onclick="openLeadPopup()">
+                                    <i class="bi bi-download"></i> Baixar Grátis
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
+                <!--
                 <div class="col-lg-3 col-md-6">
                     <div class="resource-card">
                         <i class="bi bi-file-earmark-pdf resource-icon"></i>
@@ -968,9 +1241,10 @@
                         </button>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
     </section>
+    
 
     <!-- FAQ SECTION -->
     <section class="faq-section section-padding">
@@ -1049,7 +1323,7 @@
                 Entre em contato conosco e descubra como nosso programa pode reduzir afastamentos e melhorar produtividade.
             </p>
             <div>
-                <button class="btn-cta-final" onclick="gtag('event', 'final_proposta_click');">
+                <button class="btn-cta-final" onclick="openPropostaModal(); gtag('event', 'final_proposta_click');">
                     <i class="bi bi-arrow-right"></i> Solicitar Proposta
                 </button>
                 <a href="https://wa.me/5511914214449?text=Olá,%20gostaria%20de%20falar%20com%20um%20especialista" class="btn-cta-final"
@@ -1060,6 +1334,51 @@
             </div>
         </div>
     </section>
+
+    <!-- Modal de Proposta -->
+    <div id="propostaModal" class="modal-overlay" style="display: none;">
+        <div class="modal-content modal-proposta">
+            <span class="modal-close" onclick="closePropostaModal()">&times;</span>
+    
+            <h2 class="modal-title">Solicite uma Proposta</h2>
+            <p class="modal-subtitle">Preencha o formulário e nossa equipe entrará em contato em até 24 horas.</p>
+    
+            <form id="propostaForm" class="proposta-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="text" id="prop-nome" name="nome" placeholder="Nome completo" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="prop-email" name="email" placeholder="E-mail corporativo" required>
+                    </div>
+                </div>
+    
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="tel" id="prop-telefone" name="telefone" placeholder="Telefone" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="prop-empresa" name="empresa" placeholder="Empresa">
+                    </div>
+                </div>
+    
+                <div class="form-group">
+                    <textarea id="prop-mensagem" name="mensagem" rows="4"
+                        placeholder="Conte-nos sobre suas necessidades (opcional)"></textarea>
+                </div>
+    
+                <button type="submit" class="btn-submit-proposta">
+                    <i class="bi bi-send"></i> Enviar Solicitação
+                </button>
+    
+                <div id="proposta-mensagem" class="form-message" style="display: none;"></div>
+            </form>
+        </div>
+    </div>
+    
+    </body>
+    
+    </html>
 
     <!-- FOOTER -->
     <footer class="footer">
@@ -1230,6 +1549,111 @@
                     button.disabled = false;
                 }
             }
+
+        // ===== FUNÇÕES DO POPUP DE PROPOSTA =====
+
+            function openPropostaModal() {
+                document.getElementById('propostaModal').style.display = 'flex';
+
+                // Google Analytics
+                if (typeof gtag === "function") {
+                    gtag("event", "proposta_popup_opened", {
+                        event_category: "Proposta",
+                        event_label: "Modal Aberto"
+                    });
+                }
+            }
+
+            function closePropostaModal() {
+                document.getElementById('propostaModal').style.display = 'none';
+            }
+
+            // Fechar ao clicar fora do modal
+            document.getElementById('propostaModal')?.addEventListener('click', function (e) {
+                if (e.target === this) {
+                    closePropostaModal();
+                }
+            });
+
+            // Enviar formulário de proposta
+            document.getElementById('propostaForm')?.addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                const button = this.querySelector('.btn-submit-proposta');
+                const mensagem = document.getElementById('proposta-mensagem');
+
+                // Capturar dados
+                const dados = {
+                    nome: document.getElementById('prop-nome').value.trim(),
+                    email: document.getElementById('prop-email').value.trim(),
+                    telefone: document.getElementById('prop-telefone').value.trim(),
+                    empresa: document.getElementById('prop-empresa').value.trim(),
+                    mensagem: document.getElementById('prop-mensagem').value.trim()
+                };
+
+                // Loading
+                button.disabled = true;
+                button.innerHTML = '<i class="bi bi-hourglass-split"></i> Enviando...';
+                mensagem.style.display = 'none';
+
+                try {
+                    const response = await fetch('https://dnfocupacional.com.br/api/proposta', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(dados)
+                    });
+
+                    const result = await response.json();
+
+                    if (response.ok && result.success) {
+                        // Sucesso
+                        mensagem.className = 'form-message success';
+                        mensagem.textContent = '✅ Proposta enviada com sucesso! Entraremos em contato em até 24 horas.';
+                        mensagem.style.display = 'block';
+
+                        // Google Analytics
+                        if (typeof gtag === "function") {
+                            gtag("event", "generate_lead", {
+                                event_category: "Proposta",
+                                event_label: "Formulário Enviado"
+                            });
+                        }
+
+                        // Limpar formulário
+                        this.reset();
+
+                        // Fechar após 3 segundos
+                        setTimeout(() => {
+                            closePropostaModal();
+                            mensagem.style.display = 'none';
+                        }, 3000);
+
+                    } else {
+                        throw new Error(result.error || 'Erro ao enviar proposta');
+                    }
+
+                } catch (error) {
+                    console.error('Erro:', error);
+
+                    // Erro
+                    mensagem.className = 'form-message error';
+
+                    if (error.message.includes('já solicitou')) {
+                        mensagem.textContent = '⚠️ Você já solicitou uma proposta. Nossa equipe entrará em contato em breve!';
+                    } else {
+                        mensagem.textContent = '❌ Erro ao enviar. Tente novamente ou entre em contato via WhatsApp.';
+                    }
+
+                    mensagem.style.display = 'block';
+                } finally {
+                    // Restaurar botão
+                    button.disabled = false;
+                    button.innerHTML = '<i class="bi bi-send"></i> Enviar Solicitação';
+                }
+            });
 </script>
+
 </body>
 </html>
