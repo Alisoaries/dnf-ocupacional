@@ -66,6 +66,54 @@ app.post("/api/lead", async (req, res) => {
   }
 });
 
+// ===== ROTA: Receber Proposta Comercial =====
+app.post("/api/proposta", async (req, res) => {
+  try {
+    const { nome, email, telefone, empresa = "", mensagem = "" } = req.body || {};
+
+    // Validação
+    if (!nome || !email || !telefone) {
+      return res.status(400).json({ 
+        success: false,
+        error: "Nome, email e telefone são obrigatórios" 
+      });
+    }
+
+    // Salvar no banco (tabela propostas)
+    const conn = await pool.getConnection();
+    try {
+      await conn.execute(
+        "INSERT INTO propostas (nome, email, telefone, empresa, mensagem) VALUES (?, ?, ?, ?, ?)",
+        [nome, email, telefone, empresa, mensagem]
+      );
+    } catch (dbError) {
+      // Verifica se é erro de duplicate entry (email já existe)
+      if (dbError.code === 'ER_DUP_ENTRY') {
+        conn.release();
+        return res.status(409).json({ 
+          success: false,
+          error: "Você já solicitou uma proposta. Nossa equipe entrará em contato em breve!" 
+        });
+      }
+      throw dbError;
+    } finally {
+      conn.release();
+    }
+
+    return res.json({ 
+      success: true, 
+      message: "Proposta cadastrada com sucesso!" 
+    });
+
+  } catch (err) {
+    console.error("❌ Erro ao processar proposta:", err);
+    return res.status(500).json({ 
+      success: false,
+      error: "Erro ao processar solicitação. Tente novamente." 
+    });
+  }
+});
+
 const PORT = Number(process.env.PORT || 5001);
 app.listen(PORT, "127.0.0.1", () => {
   console.log(`API Node rodando em http://127.0.0.1:${PORT}`);
