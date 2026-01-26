@@ -668,9 +668,23 @@
         .cta-final-section {
             background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-green) 100%);
             color: var(--white);
-            padding: 80px 0;
-            text-align: center;
+            padding: 60px 0;
+            text-align: center;             
         }
+
+        .cta-final-section > div {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            }
+
+        .cta-final-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+         }
 
         .cta-final-title {
             font-family: 'Playfair Display', serif;
@@ -688,7 +702,7 @@
         .btn-cta-final {
             background: var(--white);
             color: var(--primary-blue);
-            padding: 16px 40px;
+            padding: 20px 40px;
             border: none;
             border-radius: 8px;
             font-weight: 700;
@@ -696,16 +710,25 @@
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 10px;            
             transition: all 0.3s ease;
             cursor: pointer;
-            margin: 0 0.5rem;
+            margin: 0 0.7rem;
         }
 
         .btn-cta-final:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             color: var(--primary-blue);
+        }
+
+        .cta-buttons-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 1rem;
         }
 
         /* ===== FOOTER ===== */
@@ -1322,15 +1345,15 @@
             <p class="cta-final-subtitle">
                 Entre em contato conosco e descubra como nosso programa pode reduzir afastamentos e melhorar produtividade.
             </p>
-            <div>
+            <div class="cta-buttons-container">
                 <button class="btn-cta-final" onclick="openPropostaModal(); gtag('event', 'final_proposta_click');">
                     <i class="bi bi-arrow-right"></i> Solicitar Proposta
                 </button>
-                <a href="https://wa.me/5511914214449?text=Olá,%20gostaria%20de%20falar%20com%20um%20especialista" class="btn-cta-final"
-                    target="_blank" rel="noopener noreferrer" onclick="gtag('event', 'final_whatsapp_click');">
+                <a href="https://wa.me/5511914214449?text=Olá,%20gostaria%20de%20falar%20com%20um%20especialista"
+                    class="btn-cta-final" target="_blank" rel="noopener noreferrer"
+                    onclick="gtag('event', 'final_whatsapp_click');">
                     <i class="bi bi-whatsapp"></i> Falar com Especialista
                 </a>
-                </button>
             </div>
         </div>
     </section>
