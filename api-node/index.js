@@ -62,9 +62,16 @@ app.post("/api/lead", async (req, res) => {
 
     return res.json({ success: true, saved: true, emailed: true });
   } catch (err) {
-    return res.status(500).json({ error: String(err?.message || err) });
-  }
-});
+    console.error("=== ERRO NA ROTA /api/lead ===");
+    console.error("Mensagem:", err.message);
+    console.error("Stack completo:", err.stack);
+    console.error("Objeto erro:", err);
+
+    return res.status(500).json({
+      error: String(err?.message || err),
+      stack: err.stack
+    });
+   } 
 
 // ===== ROTA: Receber Proposta Comercial =====
 app.post("/api/proposta", async (req, res) => {
