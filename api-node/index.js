@@ -71,7 +71,8 @@ app.post("/api/lead", async (req, res) => {
       error: String(err?.message || err),
       stack: err.stack
     });
-   } 
+  }
+});
 
 // ===== ROTA: Receber Proposta Comercial =====
 app.post("/api/proposta", async (req, res) => {
@@ -80,9 +81,9 @@ app.post("/api/proposta", async (req, res) => {
 
     // Validação
     if (!nome || !email || !telefone) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         success: false,
-        error: "Nome, email e telefone são obrigatórios" 
+        error: "Nome, email e telefone são obrigatórios"
       });
     }
 
@@ -97,9 +98,9 @@ app.post("/api/proposta", async (req, res) => {
       // Verifica se é erro de duplicate entry (email já existe)
       if (dbError.code === 'ER_DUP_ENTRY') {
         conn.release();
-        return res.status(409).json({ 
+        return res.status(409).json({
           success: false,
-          error: "Você já solicitou uma proposta. Nossa equipe entrará em contato em breve!" 
+          error: "Você já solicitou uma proposta. Nossa equipe entrará em contato em breve!"
         });
       }
       throw dbError;
@@ -107,16 +108,16 @@ app.post("/api/proposta", async (req, res) => {
       conn.release();
     }
 
-    return res.json({ 
-      success: true, 
-      message: "Proposta cadastrada com sucesso!" 
+    return res.json({
+      success: true,
+      message: "Proposta cadastrada com sucesso!"
     });
 
   } catch (err) {
     console.error("❌ Erro ao processar proposta:", err);
-    return res.status(500).json({ 
+    return res.status(500).json({
       success: false,
-      error: "Erro ao processar solicitação. Tente novamente." 
+      error: "Erro ao processar solicitação. Tente novamente."
     });
   }
 });
